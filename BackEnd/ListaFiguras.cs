@@ -9,18 +9,27 @@ namespace BackEnd
 {
     public class ListaFiguras
     {
-        public Figura[] lista { get; set; } = new Figura[5];
+        public Figura[] lista { get; set; } = new Figura[10];
 
-        public async void GenerarFiguras(Color aColor,
+        public async Task GenerarFiguras(Color aColor,
                                 int aAnchoVentana,
                                 int aAltoVentana) 
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Figura F = new Figura();
                 F.Inicializar(aColor, aAnchoVentana, aAltoVentana);
+                lista[i] = F;
                 await Task.Delay(100);
-                lista[i] = F;   
+            }
+        }
+
+        public void MoverFiguras(int aAnchoVentana,
+                                int aAltoVentana)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                lista[i].Mover(aAnchoVentana, aAltoVentana);
             }
         }
     }

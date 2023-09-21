@@ -14,6 +14,9 @@ namespace Movimiento
     public partial class Form1 : Form
     {
         int velocidad = 100;
+
+        private ListaFiguras Figuras = new ListaFiguras();
+
         public Form1()
         {
             InitializeComponent();
@@ -23,39 +26,20 @@ namespace Movimiento
         {
             btIniciar.Visible = false;
 
-            Figura F1 = new Figura();
-            F1.Inicializar(Color.Red, this.Width, this.Height);
-            await Task.Delay(velocidad);
-            Controls.Add(F1.Figu);
-
-            Figura F2 = new Figura();
-            F2.Inicializar(Color.Blue, this.Width, this.Height);
-            await Task.Delay(velocidad);
-            Controls.Add(F2.Figu);
-
-            Figura F3 = new Figura();
-            F3.Inicializar(Color.Black, this.Width, this.Height);
-            await Task.Delay(velocidad);
-            Controls.Add(F3.Figu);
+            await Figuras.GenerarFiguras(Color.Red, this.Width, this.Height);
+            await Task.Delay(100);
 
 
-            Figura F4 = new Figura();
-            F4.Inicializar(Color.Yellow, this.Width, this.Height);
-            await Task.Delay(velocidad);
-            Controls.Add(F4.Figu);
+            for (int i = 0; i<10;i++)
+            {
+                Controls.Add(Figuras.lista[i].Figu);
+            }
 
             this.Refresh();
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 500; i++)
             {
-                F1.Mover(this.Width, this.Height);
-
-                F2.Mover(this.Width, this.Height);
-
-                F3.Mover(this.Width, this.Height);
-
-                F4.Mover(this.Width, this.Height);
-
+                Figuras.MoverFiguras(this.Width, this.Height);
                 this.Refresh();
                 await Task.Delay(velocidad);
             }
